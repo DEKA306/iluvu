@@ -3,285 +3,93 @@
 <html lang="ko">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="theme-color" content="#09090b">
-  <meta name="description" content="2026년 10월 14일부터 오늘까지 경과한 날짜를 확인하세요.">
-  <title>DAY COUNT — 경과 일수</title>
-
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#ffffff">
+  <title>우리의 날짜</title>
   <style>
     * {
       box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
-
-    :root {
-      color-scheme: dark;
-      --bg: #09090b;
-      --panel: #111114;
-      --border: #27272a;
-      --text: #fafafa;
-      --muted: #a1a1aa;
-      --accent: #a3e635;
     }
 
     body {
+      margin: 0;
       min-height: 100vh;
-      background:
-        radial-gradient(ellipse at 50% 35%, #202817 0%, transparent 55%),
-        var(--bg);
-      color: var(--text);
-      font-family: Inter, "Pretendard", "Noto Sans KR",
-        system-ui, sans-serif;
       display: flex;
-      flex-direction: column;
-    }
-
-    header {
-      display: flex;
-      justify-content: space-between;
       align-items: center;
-      padding: 28px 7%;
-      border-bottom: 1px solid #ffffff0d;
-    }
-
-    .logo {
-      font-size: 14px;
-      font-weight: 900;
-      letter-spacing: 3px;
-    }
-
-    .status {
-      color: var(--accent);
-      font-size: 11px;
-      letter-spacing: 1px;
+      justify-content: center;
+      background: #fff;
+      color: #222;
+      font-family: Arial, "Noto Sans KR", sans-serif;
     }
 
     main {
-      flex: 1;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      padding: 60px 20px 80px;
       text-align: center;
+      padding: 24px;
     }
 
-    .eyebrow {
-      color: var(--muted);
-      font-size: 12px;
-      letter-spacing: 4px;
-      margin-bottom: 24px;
+    .date {
+      font-size: 14px;
+      color: #999;
+      letter-spacing: 1px;
+      margin-bottom: 28px;
     }
 
-    h1 {
-      font-size: clamp(34px, 7vw, 64px);
-      font-weight: 800;
-      letter-spacing: -2px;
-      margin-bottom: 16px;
-    }
-
-    .description {
-      color: var(--muted);
-      font-size: 15px;
-      line-height: 1.8;
-    }
-
-    .counter {
-      margin: 55px 0 35px;
-      display: flex;
-      align-items: baseline;
-      justify-content: center;
-      gap: 14px;
-    }
-
-    #days {
-      font-size: clamp(100px, 23vw, 190px);
-      font-weight: 900;
+    .days {
+      font-size: clamp(76px, 18vw, 120px);
+      font-weight: 500;
+      letter-spacing: -5px;
       line-height: 1;
-      letter-spacing: -9px;
-      color: var(--accent);
-      font-variant-numeric: tabular-nums;
-      text-shadow: 0 0 70px #a3e63518;
     }
 
     .unit {
-      font-size: 22px;
-      font-weight: 700;
-      color: var(--muted);
+      font-size: 18px;
+      color: #777;
+      margin-top: 16px;
     }
 
-    .card {
-      width: min(100%, 440px);
-      background: #ffffff05;
-      border: 1px solid var(--border);
-      border-radius: 18px;
-      padding: 24px;
-      text-align: left;
-      backdrop-filter: blur(12px);
-    }
-
-    .card-row {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 16px;
-      padding: 12px 0;
-    }
-
-    .card-row + .card-row {
-      border-top: 1px solid #ffffff0d;
-    }
-
-    .label {
-      font-size: 13px;
-      color: var(--muted);
-    }
-
-    .value {
-      font-size: 14px;
-      font-weight: 700;
-      text-align: right;
-    }
-
-    .tag {
-      display: inline-block;
-      color: var(--accent);
-      border: 1px solid #a3e63545;
-      background: #a3e6350c;
-      border-radius: 100px;
-      padding: 6px 12px;
-      font-size: 11px;
-      margin-top: 26px;
-      letter-spacing: 1px;
-    }
-
-    footer {
-      padding: 24px;
-      text-align: center;
-      color: #71717a;
-      font-size: 11px;
-      letter-spacing: 1px;
-      border-top: 1px solid #ffffff0d;
-    }
-
-    @media (max-width: 480px) {
-      header {
-        padding: 22px 20px;
-      }
-
-      .counter {
-        gap: 8px;
-        margin: 45px 0 30px;
-      }
-
-      #days {
-        letter-spacing: -5px;
-      }
-
-      .unit {
-        font-size: 18px;
-      }
+    .heart {
+      color: #e9a0ad;
+      font-size: 18px;
+      margin-top: 28px;
     }
   </style>
 </head>
-
 <body>
-  <header>
-    <div class="logo">DAY COUNT.</div>
-    <div class="status">● LIVE COUNTER</div>
-  </header>
-
   <main>
-    <p class="eyebrow">TIME ELAPSED</p>
-
-    <h1>시간은 흐른다.</h1>
-    <p class="description">
-      2026년 10월 14일부터 오늘까지<br>
-      얼마나 많은 시간이 지났을까?
-    </p>
-
-    <div class="counter" aria-live="polite">
-      <span id="days">0</span>
-      <span class="unit">DAYS</span>
-    </div>
-
-    <section class="card" aria-label="날짜 정보">
-      <div class="card-row">
-        <span class="label">기준일</span>
-        <span class="value" id="startDate">2026.10.14</span>
-      </div>
-      <div class="card-row">
-        <span class="label">오늘</span>
-        <span class="value" id="today">계산 중...</span>
-      </div>
-      <div class="card-row">
-        <span class="label">경과 시간</span>
-        <span class="value" id="elapsed">계산 중...</span>
-      </div>
-    </section>
-
-    <div class="tag" id="message">KEEP MOVING FORWARD</div>
+    <div class="date">2026.10.14</div>
+    <div class="days" id="days">1</div>
+    <div class="unit">일째</div>
+    <div class="heart">♥</div>
   </main>
 
-  <footer>
-    BUILT TO TRACK TIME · DAY COUNT
-  </footer>
-
   <script>
-    // 기준일: 2026년 10월 14일
-    const START_DATE = new Date(2026, 9, 14);
+    const startDate = new Date(2026, 9, 14);
 
-    function getDayNumber(date) {
-      return Date.UTC(
-        date.getFullYear(),
-        date.getMonth(),
-        date.getDate()
-      ) / 86400000;
-    }
-
-    function updateCounter() {
+    function updateDays() {
       const now = new Date();
 
-      const elapsedDays =
-        getDayNumber(now) - getDayNumber(START_DATE);
+      const start = Date.UTC(
+        startDate.getFullYear(),
+        startDate.getMonth(),
+        startDate.getDate()
+      );
 
-      const dateFormat = new Intl.DateTimeFormat("ko-KR", {
-        year: "numeric",
-        month: "2-digit",
-        day: "2-digit",
-        weekday: "short"
-      });
+      const today = Date.UTC(
+        now.getFullYear(),
+        now.getMonth(),
+        now.getDate()
+      );
+
+      const elapsed = Math.floor(
+        (today - start) / 86400000
+      ) + 1;
 
       document.getElementById("days").textContent =
-        Math.abs(elapsedDays).toLocaleString("ko-KR");
-
-      document.getElementById("today").textContent =
-        dateFormat.format(now);
-
-      if (elapsedDays > 0) {
-        document.getElementById("elapsed").textContent =
-          `${elapsedDays.toLocaleString("ko-KR")}일 경과`;
-        document.getElementById("message").textContent =
-          "KEEP MOVING FORWARD";
-      } else if (elapsedDays === 0) {
-        document.getElementById("elapsed").textContent = "오늘이 기준일";
-        document.getElementById("message").textContent = "DAY ZERO";
-      } else {
-        document.getElementById("elapsed").textContent =
-          `기준일까지 ${Math.abs(elapsedDays)}일 남음`;
-        document.getElementById("message").textContent =
-          "COUNTING DOWN";
-      }
-
-      document.querySelector(".unit").textContent =
-        elapsedDays < 0 ? "DAYS LEFT" : "DAYS";
+        Math.max(1, elapsed).toLocaleString("ko-KR");
     }
 
-    updateCounter();
-
-    // 날짜가 바뀌는 경우를 대비해 주기적으로 갱신
-    setInterval(updateCounter, 60 * 1000);
+    updateDays();
+    setInterval(updateDays, 60000);
   </script>
 </body>
 </html>
